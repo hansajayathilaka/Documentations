@@ -1,0 +1,9 @@
+This command will move it to the top:
+
+	gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top true
+
+Use this to undo it:
+
+	gsettings set org.gnome.shell.extensions.dash-to-dock show-apps-at-top false
+
+These commands can also be used to move the "Show Applications" button in dock from right to left or vice versa.

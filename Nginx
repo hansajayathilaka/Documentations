@@ -1,0 +1,48 @@
+# nginx Config File
+/etc/nginx/sites-available
+
+
+# Check Nginx Configuration Syntax
+$ sudo nginx -t
+$ sudo nginx -T
+
+
+# Start Nginx Service
+$ sudo systemctl start nginx #systemd
+OR
+$ sudo service nginx start   #sysvinit
+
+
+# Enable Nginx Service
+$ sudo systemctl enable nginx #systemd
+OR
+$ sudo service nginx enable   #sysv init
+
+
+# Restart Nginx Service
+$ sudo systemctl restart nginx #systemd
+OR
+$ sudo service nginx restart   #sysv init
+
+
+# View Nginx Service Status
+$ sudo systemctl status nginx #systemd
+OR
+$ sudo service nginx status   #sysvinit
+
+
+# Reload Nginx Service
+$ sudo systemctl reload nginx #systemd
+OR
+$ sudo service nginx reload   #sysvinit
+
+
+# Stop Nginx Service
+$ sudo systemctl stop nginx #systemd
+OR
+$ sudo service nginx stop   #sysvinit
+
+
+# Show Nginx Command Help
+$ systemctl -h nginx
+

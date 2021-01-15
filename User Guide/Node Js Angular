@@ -1,0 +1,18 @@
+Install Angular
+	npm install --save @angular/cli
+
+For version
+	ng --version
+
+Create a project
+	ng new angular_app_name
+
+Press Y for create routers. Then Choouse your style Type(CSS).
+
+To run angular Server (Before Run this go in to the forlder)
+	ng serve
+
+Add components
+	ng generate component componant-path-from-app-and-name
+OR
+	ng g c componant-path-from-app-and-name

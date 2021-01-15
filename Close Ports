@@ -1,0 +1,6 @@
+fuser -k -n tcp 8080
+fuser -k -n tcp 8000
+
+## All open ports
+sudo netstat -tulpn | grep LISTEN
+

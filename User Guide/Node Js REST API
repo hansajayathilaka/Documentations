@@ -1,0 +1,23 @@
+# Use Fallowing link to install npm and Node.js
+	https://linuxize.com/post/how-to-install-node-js-on-ubuntu-18.04/
+
+Run this command on the directry that you wish to create Node project and Answer the quactions
+	npm init
+
+Express
+	npm install --save express
+
+# You have to create the your own server for nodejs.
+# So create a new file named server.js
+
+Add this library to prevent restsrting the server in each and every change. # -dev beacuse this library is use only for the development
+	npm --save-dev nodemon
+
+
+For Encription visit to the below site
+	https://github.com/kelektiv/node.bcrypt.js
+
+For JWD
+	https://github.com/auth0/node-jsonwebtoken
+
+

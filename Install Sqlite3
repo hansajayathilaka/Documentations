@@ -1,0 +1,7 @@
+sudo apt install sqlite3
+sqlite3 --version
+sqlite3 example.db
+sudo add-apt-repository -y ppa:linuxgndu/sqlitebrowser
+sudo apt update
+sudo apt install sqlitebrowser
+

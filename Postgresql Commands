@@ -1,0 +1,16 @@
+# READ MORE
+https://www.liquidweb.com/kb/listing-switching-databases-postgresql/#:~:text=Step%204%3A%20Switching%20Between%20Databases%20in%20PostgreSQL&text=When%20you%20need%20to%20change,followed%20by%20the%20database%20name.
+
+# Postgress SQL CLI
+psql
+
+# List databases
+\list
+
+# Connect to database
+\connect <dbName>
+\c <dbName>
+
+# Quit
+\q
+

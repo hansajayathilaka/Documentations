@@ -1,0 +1,7 @@
+Install rest framework
+	pip install djangorestframework
+
+Add this code to settings.py
+	INSTALLED_APPS = [
+		'rest_framework',
+	]

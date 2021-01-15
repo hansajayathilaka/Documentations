@@ -1,0 +1,26 @@
+Install Python2 for Ubuntu 20.04
+
+Pip for Python 2 is not included in the Ubuntu 20.04 repositories.
+You need to install pip for Python 2 using the get-pip.py script.
+
+1. Start by enabling the universe repository:
+	sudo add-apt-repository universe
+	
+2. Update the packages index and install Python 2:
+	sudo apt update 
+	sudo apt install python2
+
+3. Use curl to download the get-pip.py script:
+	curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+
+4. Once the repository is enabled, run the script as sudo user with python2 to install pip for Python 2:
+	sudo python2 get-pip.py
+
+Pip will be installed globally. If you want to install it only for your user, run the command without sudo. The script will also install setuptools and wheel, which allow you to install source distributions
+
+Verify the installation by printing the pip version number:
+	pip2 --version
+
+The output will look something like this:
+	pip 20.0.2 from /usr/local/lib/python2.7/dist-packages/pip (python 2.7)
+	

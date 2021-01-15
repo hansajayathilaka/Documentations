@@ -1,0 +1,12 @@
+# Build Angular App
+	ng build --base-href=telehealth
+
+# Copy build.zip to server
+	scp -P 22061 /home/hansa/Downloads/build.zip hansa@demo.remedy.pro:/home/hansa/telehealth/2020-07-22/build.zip
+
+cd /webapps/telehealth/
+sudo rm -r *.*
+sudo rm -r assets/
+sudo cp /home/hansa/telehealth/2020-07-22/build.zip /webapps/telehealth/build.zip
+sudo unzip build.zip
+

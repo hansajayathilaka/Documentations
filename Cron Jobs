@@ -1,0 +1,22 @@
+Reference for the basic of Cron:
+https://www.digitalocean.com/community/tutorials/how-to-use-cron-to-automate-tasks-ubuntu-1804
+
+sudo apt install cron
+sudo systemctl enable cron
+
+This is the syntax for the cron job
+	minute hour day_of_month month day_of_week command_to_run
+
+Edit cron jobs
+	crontab -e
+
+Don't edit this
+This is the plase where the root of the jobs stay.
+	sudo nano /etc/crontab
+
+Remove the all cron jobs
+	crontab -r
+
+Display cron config file
+	crontab -l
+

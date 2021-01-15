@@ -1,0 +1,23 @@
+Cannot launch Ubuntu Software Center after installing 20.04
+
+Suggestion: You could remove the snap version of Ubuntu Software and replace it with the apt package from the Ubuntu repository. The snap was named 'Snap Store' in the 20.04 beta. Check that this is still the case in the final release (I don't know since I removed it before the final release).
+
+
+Use your terminal:
+Code:
+	snap list
+
+
+If you see snap-store, remove it with the command:
+Code:
+	snap remove snap-store
+
+
+Then, install from the Ubuntu repository:
+Code:
+	sudo apt install ubuntu-software
+
+
+Note: This really installs gnome-software (and appears as 'Software' in your applications).
+This may work better for you.
+

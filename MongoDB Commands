@@ -1,0 +1,48 @@
+* Basic MongoDB Commands
+
+Create Database
+> use dbName
+
+Show Databases
+> show dbs
+
+Check DB
+> db
+
+Drop Database
+> dbName.dropDatabase()
+
+Create Collection
+> db.createCollection(‘name’, ‘options’)
+(Here, the name is the name of the collection & options is a document that is used to specify the configuration of the collection. Though the “Options” parameter is optional, it’s good to provide it.)
+
+Drop Collections
+> db.collectionName.drop()
+
+Show Collections
+> show collections
+
+Insert Document
+* Insert() or save()
+> db.collectionName.insert({name:'Thomas', age:30, address: '123 Main St'})
+
+Query Document
+> db.collectionName.find()                        -->        (non-structured)
+> db.collectionName.find().pretty()        -->        (structured)
+
+
+* Intermediate MongoDB Commands
+
+Limits number of records
+> db.collectionName.find().limit(number)
+        (The argument is the number of the document that needs to be displayed.)
+        
+Sort records
+> db.collectionName.find().sort({KEY:1})
+(KEY => key in collection (_id / name / age ...). 1 is for ascending whereas -1 is for descending.)
+
+Indexing
+> db.collectionName.ensureIndex({KEY:1})
+Or  > db.collectionName.createIndex({KEY:1})
+(Indexing is the concept that helps MongoDB to scan documents inefficient way)
+

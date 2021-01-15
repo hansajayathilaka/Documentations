@@ -1,0 +1,12 @@
+# Display all snap installed softwares
+snap list
+
+# Show all changes of snap
+snap changes
+
+# Abort a snap instalation or something like that
+sudo snap abort <pkg_name>
+
+# Install snap pkg
+sudo snap install <pkg_name>
+

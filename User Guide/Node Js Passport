@@ -1,0 +1,4 @@
+For install Passport
+	npm install passport passport-google-oauth20
+
+Then setup Config File.

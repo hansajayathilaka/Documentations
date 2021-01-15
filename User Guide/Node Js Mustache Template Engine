@@ -1,0 +1,12 @@
+## setup mustache template engine
+
+mustache template engine
+	npm install mustache –save
+
+#Add to app.js
+
+const mustacheExpress = require('mustache-express');
+
+app.engine('html', mustacheExpress());
+app.set('view engine', 'html');
+app.set('views', path.join(__dirname, './templates'));

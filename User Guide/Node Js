@@ -1,0 +1,374 @@
+# First you have to install NodeJs, npm. [Using NVM (Node Version Manager)]
+
+Download and install the nvm script
+	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+
+Reopen the terminal and try this to chack the version
+	nvm --version
+
+Install Node.Js
+	nvm install node
+
+Try this for Node version
+	node --version
+
+Install more versions
+	nvm install --lts
+	nvm install 8.10.0
+
+List node versions
+	nvm ls
+
+Output will be like this
+	->      v8.10.0
+	       v10.16.3
+		v12.8.1
+	default -> node (-> v12.8.1)
+	node -> stable (-> v12.8.1) (default)
+	stable -> 12.8 (-> v12.8.1) (default)
+	iojs -> N/A (default)
+	unstable -> N/A (default)
+	lts/* -> lts/dubnium (-> v10.16.3)
+	lts/argon -> v4.9.1 (-> N/A)
+	lts/boron -> v6.17.1 (-> N/A)
+	lts/carbon -> v8.16.1 (-> N/A)
+	lts/dubnium -> v10.16.3
+
+Change current node version
+	nvm use 10.16.3
+
+Use this for change the default Node.Js version
+	nvm alias default 10.16.3
+
+# Now Node.Js is installed Correctly.
+
+
+# Let's start Express library for Node.Js
+
+Install Express
+	sudo npm install -g express-generator
+
+Start a express project
+	express project_name
+
+# Server is in bin folder and www file is the server. The default port is 3000. To Change port do the below changes.
+
+Change this:
+	var port = normalizePort(process.env.PORT || '3000');
+to this:
+	var port = normalizePort(process.env.PORT || '8080');
+
+# There are many dependancies. Install those files.
+	npm install
+
+# Start server.
+
+Basic method
+	node bin/www
+
+Good method
+	npm start
+
+## If you change anything on scripts, server must be restart. Otherwise the changes not be happen.
+
+# Main URL pattern is in app.js.
+
+
+# Let's use Handlebars Templating Engine instead of Jade.
+
+Remove Jade from project dependancies
+	npm uninstall jade --save
+
+Install handlebars
+	npm install express-handlebars --save
+
+# --save is use for add files to node-modeles
+
+# Now we have to add some code lines to app.js to setup handelbars.
+Add to app.js
+	var hbs = require('express-handlebars');
+	app.engine('hbs', hbs({extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts'}))
+
+Change this
+	app.set('view engine', 'jade');
+to this
+	app.set('view engine', 'hbs');
+
+
+# Templating for handlebars
+{{ ... }} This is use for plan text.
+{{{ ... }}} This is use for text with html tags.
+Does not need to insert code to extend the default layout.
+
+# if statement in handlebars
+	{{# if condition }}
+		...
+	{{ else }}
+		...
+	{{/if}}
+# This is define a single block.
+## {{ /if }} Does not Working.
+
+# 'each' loop is replaced for the 'for' loop in here.
+# each loop in handebars
+	{{# each anyArray }}
+		{{ this }}
+	{{/each}}
+# You can use any array for the anyArray in loop.
+# "{{ this }}" is return the current value of the loop.
+
+# More for 'each' loop.
+{{# each anyArray as |val key| }}
+	{{ key }} : {{ val }}
+{{/each}}
+# Get key and value seperately.
+
+
+# GET and POST
+
+# In dynamic urls "/:id" can be use to get  data from url. The example is a GET request.
+	router.get('/test/:id', function(req, res, next){
+	  res.render('test', {output: req.params.id});
+	});
+
+# Access POST data from a form. Name of the text box is id.
+	router.post('/test/submit', function(req, res, next){
+	  var id = req.body.id;
+	  res.redirect('/test/' + id);
+	});
+
+
+# Validaing and Sessions
+
+Install express-validator
+	npm install --save express-validator
+
+Install express-session
+	npm install --save express-session
+
+Add to app.js
+	var expressSession = require('express-session');
+
+Add to app.js  ### Only for express-validator 5.x
+	var expressValidator = require('express-validator');
+
+Add to app.js  ## This should be add just after this "app.use(bodyParser....());"  ### Only for express-validator 5.x
+	app.use(expressValidator());
+
+Add to app.js  # Go for more information: https://github.com/expressjs/session/blob/master/README.md
+	app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));
+
+Fallowing is a example for validating email and password
+In index.js in routes:
+	router.get('/validation', function (req, res, next) {
+	  res.render('validator', { title: 'Form Validator', success: req.session.success, errors: req.session.errors });
+	  req.session.errors = null;
+	  req.session.success = false;
+	});
+
+	router.post('/validation/submit', [
+	    // email must be an email
+	    check('email', 'Invalid Email')
+	      .isEmail(),
+	    // password must be at least 5 chars long
+	    check('password', 'Invalid Password')
+	      .isLength({ min: 5 })
+	      .custom((value,{req, loc, path}) => {
+		if (value !== req.body.confirmPassword) {
+		    // trow error if passwords do not match
+		    throw new Error("Passwords don't match");
+		} else {
+		    return value;
+		}
+	    })
+	  ],
+	  (req, res, next) => {
+	    // Finds the validation errors in this request and wraps them in an object with handy functions
+	    const errors = validationResult(req);
+	    req.session.success = true;
+	    if (!errors.isEmpty()) {
+	      req.session.errors = errors.array();
+	      req.session.success = false;
+	    }
+	    res.redirect('/validation');
+	  }
+	);
+
+In validation.hbs:
+	{{# if success }}
+	<section class="success">
+	    <h2>Successfuly Vatidate.</h2>
+	</section>
+	{{ else }}
+	{{# if errors }}
+	<section class="errors">
+	    <ul>
+		{{#each errors}}
+		<li>{{ this.msg }}</li>
+		{{/each}}
+	    </ul>
+	</section>
+	{{/if}}
+	<form action="/validation/submit" method="POST">
+
+	    <div class="input">
+		<label for="email">E-mail</label>
+		<input type="text" name="email" id="email">
+	    </div>
+
+	    <div class="input">
+		<label for="password">Password</label>
+		<input type="password" name="password" id="password">
+	    </div>
+
+	    <div class="input">
+		<label for="confirmPassword">Confirm Password</label>
+		<input type="password" name="confirmPassword" id="confirmPassword">
+	    </div>
+	    <button type="submit">Sign Up</button>
+	</form>
+	{{/if}}
+## req.session.variable_name this can be use for session data.
+
+
+# Mongodb for Node.Js
+
+To install Mongodb refer the fallowing URL. This is for ubuntu.
+	https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/
+	https://websiteforstudents.com/install-mongodb-on-ubuntu-18-04-lts-beta-server/
+
+Add mongodb to the node project
+	npm install --save mongodb
+
+Add these code lines to routes/index.js
+	var mongo = require('mongodb').MongoClient;
+	var assert = require('assert');
+	var objectId = require('mongodb').ObjectID;
+	var url = 'mongodb://127.0.0.1:27017/';
+
+Insert data # items is the data object that should inserted
+	mongo.connect(url, {useUnifiedTopology: true}, function(err, db) {
+	  assert.equal(null, err);
+	  // if (err) throw err;
+	  var dbo = db.db("database_name");
+	  dbo.collection("collection_name").insertOne(items, (err, result) => {
+	    assert.equal(null, err);
+	    // if (err) throw err;
+	    console.log('Item inserted');
+	    db.close();
+	  });
+	});
+
+Retreve data # items will send the data to the template "template_name"
+	var resultArray = [];
+	mongo.connect(url, {useUnifiedTopology: true}, (err, db) => {
+	  assert.equal(null, err);
+	  var dbo = db.db("database_name");
+	  var cursor = dbo.collection("collection_name").find();
+	  cursor.forEach((doc, err) => {
+	    assert.equal(null, err);
+	    resultArray.push(doc);
+	  });
+	  res.render("template_name", {items: resultArray});
+	});
+
+Update data # items is the data object that should inserted and id is the _id of the recode.
+	mongo.connect(url, {useUnifiedTopology: true}, function(err, db) {
+	  assert.equal(null, err);
+	  // if (err) throw err;
+	  var dbo = db.db("database_name");
+	  dbo.collection("collection_name").updateOne({'_id': objectId(id)}, {$set: items}, (err, result) => {
+	    assert.equal(null, err);
+	    // if (err) throw err;
+	    console.log('Item updated');
+	    db.close();
+	  });
+	});
+
+Delate data # id is the _id of the recode that should be deleted
+	mongo.connect(url, {useUnifiedTopology: true}, function(err, db) {
+	  // assert.equal(null, err);
+	  if (err) throw err;
+	  var dbo = db.db("database_name");
+	  dbo.collection("collection_name").deleteOne({'_id': objectId(id)}, (err, result) => {
+	    // assert.equal(null, err);
+	    if (err) throw err;
+	    console.log('Item deleted');
+	    db.close();
+	  });
+	});
+
+
+# There is a library called Monk that can use for handling database too easily.
+# Let's start Monk Library.
+Install monk
+	npm install --save monk
+
+Booting up MongoDB Server for port 27017
+	mongod --dbpath=/data --port 27017
+
+Insert these code line to routers/index.js
+	const url = 'localhost:27017/database_name';
+	const db = require('monk')(url);
+	const collection = db.get("collection_name");
+
+To chack database connection
+	db.then(() => {
+	  console.log('Connected correctly to server')
+	});
+
+Insert data # item is a object that should be inserted.
+	collection.insert(items)
+	  .then((docs) => {
+	    // docs contains the documents inserted with added **_id** fields
+	  }).catch((err) => {
+	    // An error happened while inserting
+	  }).then(() => db.close())
+
+## I was unable to figure out how to work with monk. The above codes worked on eirlier version. But it not working for new versions.
+
+
+# Mongoose
+Install mongoose
+	npm install --save mongoose
+
+Create the Database Connection
+	var mongoose = require('mongoose');
+	const url = 'mongodb://127.0.0.1:27017/database_name';
+	mongoose.connect(url, { useNewUrlParser: true });
+
+Create the Model Schema	# title, content, author are the fields in the collection.
+	var Schema = mongoose.Schema;
+	var collectionSchema = new Schema({
+	  title: {type: String, required: true},
+	  content: String,
+	  author: String,
+	}, {collection: 'Collection_name'});
+	var collectionModel = mongoose.model('model_name', collectionSchema)
+
+Retrive Data	# items will be called in template {{ items.field_name }}
+	UserData.find()
+	  .then((docs) => {
+	    res.render('template', {items: docs});
+	  });
+
+Insert Data	# items is a dictionary
+	var data = UserData(items);
+	data.save();
+
+Update Data
+	UserData.findById(_id, (err, doc) => {
+	  if (!err) {
+	    doc.title = req.body.title;
+	    doc.content = req.body.content;
+	    doc.author = req.body.author;
+	    doc.save();
+	    res.redirect('/');
+	  }
+	});
+
+Delete Data	# id is the id.
+	var data = UserData.findByIdAndRemove(id);
+	data.exec();
+
+

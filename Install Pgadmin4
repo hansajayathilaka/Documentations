@@ -1,0 +1,18 @@
+Import repository key
+	wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+Add repository
+	RELEASE=$(lsb_release -cs)
+	echo "deb http://apt.postgresql.org/pub/repos/apt/ ${RELEASE}"-pgdg main | sudo tee  /etc/apt/sources.list.d/pgdg.list
+
+Update system and install pgAdmin4 on Debian 10 Buster
+	sudo apt update
+	sudo apt -y install pgadmin4 pgadmin4-apache2
+
+If you have UFW firewall configured, allow http and https traffic
+	sudo ufw allow http
+	sudo ufw allow https
+
+Open your browser and
+	http://127.0.0.1/pgadmin4
+

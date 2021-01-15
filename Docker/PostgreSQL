@@ -1,0 +1,10 @@
+# Go inside the Docker container
+docker ps
+docker exec -it <container_name> <terminal_type>
+docker exec -it docker-zulip_database_1 /bin/bash
+
+# Log in to postgres
+psql -U <user_name> <database>
+psql -U postgres mydb
+
+

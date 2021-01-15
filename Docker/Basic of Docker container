@@ -1,0 +1,10 @@
+# Run Docker container
+docker run -d -P seqvence/static-site
+	-d 	Background
+	-P	Ports
+	--name	identifiable name
+
+# Find Running Containers
+docker ps -a
+	-a 	Hidden files
+

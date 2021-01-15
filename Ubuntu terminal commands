@@ -1,0 +1,3 @@
+# Display time zone
+timedatectl status | grep "Time zone"
+

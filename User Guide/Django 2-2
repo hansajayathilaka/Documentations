@@ -1,0 +1,24 @@
+# Setup Virtual Environment
+
+Install Virtual Environment
+	pip install virtualenv
+
+Create Virtual Environment For Python 2
+	virtualenv myenv
+
+Create Virtual Environment For Python 3
+	virtualenv -p python3 myenv
+
+Activate Virtual Environment
+	source myenv/bin/activate
+
+Install Django
+	pip install django
+
+Create Django Project as mysite
+	django-admin startproject mysite
+
+Create App as polls
+	python manage.py startapp polls
+
+
