@@ -3,7 +3,7 @@
 ```console
 docker run -d -p seqvence/static-site
 	-d 	Background
-	-P	Ports
+	-p	Ports
 	--name	identifiable name
 ```
 
