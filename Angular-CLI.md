@@ -10,4 +10,6 @@
 
 2. Run this command - `ng deploy --base-href=/<repositoryname>/`
 
-Done
+3. Your Project URL will be like this - `https://username.github.io/reponame/`
+
+Click [Here](https://github.com/angular-schule/angular-cli-ghpages) for more information
