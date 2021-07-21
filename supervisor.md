@@ -23,13 +23,10 @@ Add service to Supervisor
 	autostart=true
 	autorestart=true
 	startsecs=10
-
 	; Need to wait for currently executing tasks to finish at shutdown.
 	; Increase this if you have very long running tasks.
 	stopwaitsecs = 600
-
 	stopasgroup=true
-
 	; Set Celery priority higher than default (999)
 	; so, if rabbitmq is supervised, it will start first.
 	priority=1000
