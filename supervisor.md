@@ -49,6 +49,8 @@ Remove Config file
 `sudo rm <serviceName>.conf`
 
 ## update config and update the supervisor
-```sudo supervisorctl reread
-sudo supervisorctl update```
+```
+sudo supervisorctl reread
+sudo supervisorctl update
+```
 
