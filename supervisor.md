@@ -19,8 +19,12 @@ group=<userGroupName>
 numprocs=1
 ; Log file Path
 stdout_logfile=/home/mysite/logs/celery.log
+stdout_logfile_maxbytes = 50MB
+stdout_logfile_backups = 10
 ; Error Log path
 stderr_logfile=/home/mysite/logs/celery.log
+stderr_logfile_maxbytes = 50MB
+stderr_logfile_backups = 10
 autostart=true
 autorestart=true
 startsecs=10
