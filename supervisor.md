@@ -10,7 +10,7 @@ __Add this config file to the `/etc/supervisor/conf.d/<serviceName>.conf`__
 ```
 [program:<ProgreamDisplayName>]
 ; Command for run the service
-command=/home/mysite/bin/celery worker -A mysite --loglevel=INFO
+command=/home/mysite/bin/celery -A mysite worker --loglevel=INFO
 ; Path to the project
 directory=/home/mysite/mysite
 ; 'www-data' user for external Access
