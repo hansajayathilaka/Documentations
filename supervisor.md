@@ -6,7 +6,7 @@ sudo service supervisor restart
 
 ## Add service to Supervisor
 
-__Add this config file to the /etc/supervisor/conf.d/<serviceName>.conf__
+__Add this config file to the `/etc/supervisor/conf.d/<serviceName>.conf`__
 ```
 [program:<ProgreamDisplayName>]
 ; Command for run the service
