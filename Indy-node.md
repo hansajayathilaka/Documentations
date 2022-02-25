@@ -65,3 +65,35 @@ Run below codes
 sudo supervisorctl reread
 sudo supervisorctl update
 ```
+
+Install Libsodium
+```bash
+wget –N —no–check–certificate https://github.com/jedisct1/libsodium/releases/download/1.0.11/libsodium-1.0.11.tar.gz
+tar zfvx libsodium-1.0.11.tar.gz
+cd libsodium-1.0.11/
+./configure
+make && make install
+
+echo /usr/local/lib > /etc/ld.so.conf.d/usr_local_lib.conf
+ldconfig
+```
+
+Install Python 3.8
+```bash
+sudo apt update && sudo apt upgrade
+sudo apt install wget build-essential libreadline-gplv2-dev libncursesw5-dev \
+     libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
+
+wget https://www.python.org/ftp/python/3.8.10/Python-3.8.10.tgz
+tar xzf Python-3.8.10.tgz
+cd Python-3.8.10
+./configure --enable-optimizations
+make altinstall
+python3.8 -V
+```
+
+Change default python version
+- Run `vim ~/.bash_profile` and add `alias python='/usr/local/bin/python3.8'` to end of the file.
+- Run `source ~/.bash_profile` to apply changes.
+- If there is no `.bash_profile` try `.bashrc`.
+
