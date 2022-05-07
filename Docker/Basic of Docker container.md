@@ -18,3 +18,7 @@ docker run -d -p seqvence/static-site
 docker ps -a
 	-a 	Hidden files
 ```	
+## Delete all docker data from PC [Read more](https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes)
+```console
+docker system prune -a
+```
